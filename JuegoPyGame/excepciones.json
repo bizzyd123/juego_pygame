@@ -1,0 +1,6 @@
+[
+    {
+        "tipo": "ValueError",
+        "mensaje": "El jugador no cargo un nombre."
+    }
+]
