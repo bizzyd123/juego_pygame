@@ -313,7 +313,62 @@ if __name__ == "__main__":
 
     lista_niveles.append(nivel2)
 
-    #region nivel 3
+   #region nivel 3
+    personaje_grupo = pygame.sprite.Group()
+    enemigos_grupo = pygame.sprite.Group()
+    plataformas_grupo = pygame.sprite.Group()
+    trampas_grupo = pygame.sprite.Group()
+    item_grupo = pygame.sprite.Group()
+    spawn_grupo = pygame.sprite.Group()
+    aliado_grupo = pygame.sprite.Group()
+    
+    mi_personaje = Protagonista(tamaño, posicion_inicial,10,70,30)
+    personaje_grupo.add(mi_personaje)
+    
+    enemigos_grupo.add(Enemigo(tamaño, (1200,500),5,25,20,"zombie",3,10,300)) 
+    enemigos_grupo.add(Enemigo(tamaño, (700,500),8,25,20,"zombie",3,10,300))        
+    enemigos_grupo.add(Enemigo(tamaño, (150,350),5,5,30,"esqueleto",3,20,300))
+    enemigos_grupo.add(Enemigo(tamaño, (1050,230),10,5,30,"esqueleto",3,20,300))    
+    
+    #enemigos_grupo.add(Enemigo(tamaño, (100,250),5,10,20,"zombie",3,20,300))
+    #pisos
+    mi_piso = ElementoGrafico(0,575,W,20,"plataforma5")
+    plataformas_grupo.add(mi_piso)
+
+    #plataformas_grupo.add(ElementoGrafico(0,450,100,20,"plataforma2"))
+    plataformas_grupo.add(ElementoGrafico(400,450,100,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(150,350,100,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(360,250,100,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(700,350,400,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(1000,230,200,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(1200,450,130,20,"plataforma5"))
+    plataformas_grupo.add(ElementoGrafico(650,150,200,20,"plataforma5"))
+    #trampa
+    trampas_grupo.add(ElementoGrafico(480,535,100,50,"trampa"))
+    trampas_grupo.add(ElementoGrafico(900,310,100,50,"trampa"))
+    #items
+    item_grupo.add(Item(450,420,20,20,"vida","item_vida",10))
+    item_grupo.add(Item(1050,320,40,40,"magia","item_magia",15))
+    item_grupo.add(Item(700,320,30,30,"coin","item_coin",10))
+    item_grupo.add(Item(200,310,30,30,"coin","item_coin",10))
+    item_grupo.add(Item(1000,545,30,30,"coin","item_coin",10))
+    #spawn
+    spawn_activo = False
+    spawn = Spawn(730,50,60,100,"spawn","brujo",60,4,(650,0))
+    spawn.ajustar_tamanio_rectangulo(200,spawn.rect.height)
+    spawn_grupo.add(spawn)
+
+    jefe = Enemigo((75, 85), (900, 550), 7, 33, 480,"mago",4,400,300)
+    #endregion
+    
+    nivel_3 = Nivel (personaje_grupo,enemigos_grupo,plataformas_grupo, trampas_grupo,
+                    item_grupo, spawn_grupo, "Fondo_3","samirade",(W,H), jefe) 
+    lista_niveles.append(nivel_3)
+
+
+
+
+    #region nivel 4
     personaje_grupo = pygame.sprite.Group()
     enemigos_grupo = pygame.sprite.Group()
     plataformas_grupo = pygame.sprite.Group()
@@ -357,64 +412,9 @@ if __name__ == "__main__":
     spawn = Spawn(650,0,60,100,"spawn","esqueleto",20,2,(650,0))
     spawn.ajustar_tamanio_rectangulo(200,spawn.rect.height)
     spawn_grupo.add(spawn)
-    
-    jefe = Enemigo((75, 85), (900, 550), 7, 33, 480,"mago",4,1000,300)
-    #endregion
-    
-    nivel_3 = Nivel (personaje_grupo,enemigos_grupo,plataformas_grupo, trampas_grupo,
-                    item_grupo, spawn_grupo, "Fondo_3","samirade",(W,H), jefe) 
-    lista_niveles.append(nivel_3)
-
-
-
-
-    #region nivel 4
-    personaje_grupo = pygame.sprite.Group()
-    enemigos_grupo = pygame.sprite.Group()
-    plataformas_grupo = pygame.sprite.Group()
-    trampas_grupo = pygame.sprite.Group()
-    item_grupo = pygame.sprite.Group()
-    spawn_grupo = pygame.sprite.Group()
-    aliado_grupo = pygame.sprite.Group()
-    mi_personaje = Protagonista(tamaño, posicion_inicial,10,60,30)
-    personaje_grupo.add(mi_personaje)
-    
-    enemigos_grupo.add(Enemigo(tamaño, (1200,500),5,10,20,"zombie",3,10,300))        
-    enemigos_grupo.add(Enemigo(tamaño, (1000,570),5,15,30,"esqueleto",3,20,300))
-    enemigos_grupo.add(Enemigo(tamaño, (650,100),10,10,30,"esqueleto",3,20,300))    
-    enemigos_grupo.add(Enemigo(tamaño, (700,410),5,10,20,"zombie",3,20,300))
-    enemigos_grupo.add(Enemigo(tamaño, (100,250),5,10,20,"zombie",3,20,300))
-    #pisos
-    mi_piso = ElementoGrafico(0,575,W,20,"plataforma4")
-    plataformas_grupo.add(mi_piso)
-
-    #plataformas_grupo.add(ElementoGrafico(0,450,100,20,"plataforma2"))
-    plataformas_grupo.add(ElementoGrafico(300,350,100,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(100,250,100,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(330,150,100,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(450,100,400,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(550,450,200,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(600,250,130,20,"plataforma4"))
-    plataformas_grupo.add(ElementoGrafico(1000,335,150,20,"plataforma4"))
-    #trampa
-    trampas_grupo.add(ElementoGrafico(20,535,100,50,"trampa"))
-    trampas_grupo.add(ElementoGrafico(550,535,100,50,"trampa"))
-    #items
-    item_grupo.add(Item(650,80,20,20,"vida","item_vida",10))
-    item_grupo.add(Item(600,210,40,40,"magia","item_magia",5))
-    item_grupo.add(Item(1050,300,40,40,"magia","item_magia",5))
-    item_grupo.add(Item(700,410,30,30,"coin","item_coin",10))
-    item_grupo.add(Item(340,310,30,30,"coin","item_coin",10))
-    item_grupo.add(Item(650,420,20,20,"vida","item_vida",10))
-    item_grupo.add(Item(1200,545,30,30,"coin","item_coin",10))
-    #spawn
-    spawn_activo = False
-    spawn = Spawn(650,0,60,100,"spawn","esqueleto",20,2,(650,0))
-    spawn.ajustar_tamanio_rectangulo(200,spawn.rect.height)
-    spawn_grupo.add(spawn)
     aliado = Aliado(280,495)
     aliado_grupo.add(aliado)
-    jefe = Enemigo((75, 85), (900, 550), 7, 33, 480,"mago",4,1000,300)
+    jefe = Enemigo((75, 85), (900, 550), 7, 33, 480,"mago_oscuro",4,1000,300)
     #endregion
     
     nivel_4 = Nivel (personaje_grupo,enemigos_grupo,plataformas_grupo, trampas_grupo,

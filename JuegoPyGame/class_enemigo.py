@@ -133,9 +133,38 @@ class Enemigo(Personaje):
         diccionario_animaciones_enemigo["camina_izquierda"] = mago_camina_izquierda             #pasos
         diccionario_animaciones_enemigo["ataca"] = mago_ataca 
         return diccionario_animaciones_enemigo
+    def __animacion_mago_oscuro(self):
+        mago_camina = [
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/1.png"),
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/2.png"),
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/3.png"),
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/4.png"),
+        ]
+        mago_salta = [
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/1.png")
+
+        ]
+        mago_quieto = [
+            pygame.image.load("Recursos/Mago_Oscuro/Camina/1.png")
+        ]
+        mago_ataca = [
+                pygame.image.load("Recursos/Mago_Oscuro/Camina/1.png"),
+                pygame.image.load("Recursos/Mago_Oscuro/Camina/2.png"),
+                pygame.image.load("Recursos/Mago_Oscuro/Camina/3.png"),
+        ]
+        mago_camina_izquierda  = girar_imagenes(mago_camina,True,False)
+        diccionario_animaciones_enemigo = {}
+        diccionario_animaciones_enemigo["quieto"] = mago_quieto
+        diccionario_animaciones_enemigo["salta"] = mago_salta
+        diccionario_animaciones_enemigo["camina_derecha"] = mago_camina 
+        diccionario_animaciones_enemigo["camina_izquierda"] = mago_camina_izquierda             #pasos
+        diccionario_animaciones_enemigo["ataca"] = mago_ataca 
+        return diccionario_animaciones_enemigo
     #endregion
     def __crear_animaciones(self):
         match self.tipo:
+            case    "mago_oscuro":
+                animaciones = self.__animacion_mago_oscuro()
             case    "zombie":
                 animaciones = self.__animacion_zombie()
             case    "esqueleto":
@@ -222,6 +251,8 @@ class Enemigo(Personaje):
                 reproducir_sonido("Recursos/Sonidos/Efectos/disparo_mago.wav",self.volumen_efectos)
             case "esqueleto":
                 reproducir_sonido("Recursos/Sonidos/Efectos/disparo_flecha.wav",self.volumen_efectos)
+            case "mago_oscuro":
+                reproducir_sonido("Recursos/Sonidos/Efectos/disparo_mago.wav",self.volumen_efectos)
         ataque = AtaqueDistancia(self.rect.left-40,self.rect.y,self.velocidad*1.5,direccion,self.tipo)
         self.que_hace = "ataca"
         self.ataques_distancia_grupo.add(ataque)

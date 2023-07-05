@@ -59,8 +59,20 @@ class AtaqueDistancia(pygame.sprite.Sprite):
         diccionario_animaciones["izquierda"] = personaje_ataca_distancia_izquierda
         return diccionario_animaciones
     
+    def __crear_animacion_magia_oscura(self):
+        personaje_ataca_distancia_derecha = [
+            pygame.image.load("Recursos/Mago_Oscuro/Distancia/1.png")
+        ]
+        personaje_ataca_distancia_izquierda = girar_imagenes(personaje_ataca_distancia_derecha,True,False)
+        diccionario_animaciones={}
+        diccionario_animaciones["derecha"] = personaje_ataca_distancia_derecha
+        diccionario_animaciones["izquierda"] = personaje_ataca_distancia_izquierda
+        return diccionario_animaciones
+    
     def __crear_animacion(self):
         match self.tipo:
+            case "mago_oscuro":
+                animaciones = self.__crear_animacion_magia_oscura()
             case "esqueleto":
                 animaciones = self.__crear_animacion_flecha()
             case "mago":
@@ -91,3 +103,5 @@ class AtaqueDistancia(pygame.sprite.Sprite):
             self.contador_movimiento = 0
         pantalla.blit(animacion[self.contador_movimiento], self.rect)
         self.contador_movimiento += 1
+    
+    
